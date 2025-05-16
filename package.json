@@ -1,0 +1,36 @@
+{
+    "name": "webgl-examples",
+    "version": "0.0.1",
+    "description": "webGl examples",
+    "main": "index.html",
+    "scripts": {
+        "start": "npx webpack-dev-server",
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@types/react": "^15.0.12",
+        "@types/react-dom": "^0.14.23",
+        "react": "^15.4.2",
+        "react-dom": "^15.4.2",
+        "simple-dux": "^1.1.0",
+        "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#threeLeDee"
+    },
+    "devDependencies": {
+        "source-map-loader": "^0.1.6",
+        "typescript": "^2.4.1",
+        "ts-loader": "^2.3.0",
+        "tslint": "^5.5.0",
+        "webpack": "^3.3.0",
+        "webpack-dev-server": "^2.5.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jorgen-17/webglExamples.git"
+    },
+    "author": "jorgen-17",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jorgen-17/webglExamples/issues"
+    },
+    "homepage": "https://github.com/jorgen-17/webglExamples #readme"
+}

@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "command": "${workspaceRoot}/node_modules/.bin/webpack",
+    "args": [
+    ],
+    "echoCommand": true,
+    "tasks": [
+        {
+            "label": "webpack dev",
+            "type": "shell",
+            "command": "${workspaceRoot}/node_modules/.bin/webpack",
+            "args": [
+                ""
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "webpack dist",
+            "type": "shell",
+            "command": "${workspaceRoot}/node_modules/.bin/webpack",
+            "args": [
+                "-p --optimize-minimize"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
