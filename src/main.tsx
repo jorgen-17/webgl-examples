@@ -1,51 +1,121 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { WebGLRenderer3d, RenderingOptions, RGBColor, Box, Vec3 } from "webgl-renderer";
-import KeyboardHandler from "./input/keyboard-handler";
+import CameraControls from "./pages/CameraControls";
 
-class App extends React.Component<{}, {}>
+// Simple router state
+interface AppState {
+    currentPage: string;
+}
+
+class App extends React.Component<{}, AppState>
 {
-    private canvas:  HTMLCanvasElement;
-    private renderer: WebGLRenderer3d;
-    private keyboardHandler: KeyboardHandler;
-    constructor()
+    constructor(props: {})
     {
-        super();
+        super(props);
 
-        this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
-
-        const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1);
-        let renderingOptions: RenderingOptions =
-        {
-            backgroundColor: backgroundColor,
-            fullscreen: true
+        // Initialize state with the current page based on URL
+        this.state = {
+            currentPage: this.getPageFromUrl()
         };
-        this.renderer = new WebGLRenderer3d(this.canvas, renderingOptions);
 
-        const startPosition = new Vec3(-0.05, -0.05, 0);
-        const endPosition = new Vec3(0.05, 0.05, 0);
-        const color = new RGBColor(1, 1, 1);
-        const box = new Box(startPosition, endPosition, this.renderer.gl, color);
-        this.renderer.addShapeToScene(box);
+        // Listen for popstate events (back/forward browser buttons)
+        window.addEventListener('popstate', this.handlePopState);
+    }
 
-        // Add keydown event listener
-        this.keyboardHandler = new KeyboardHandler(this.renderer);
-        document.addEventListener('keydown', this.keyboardHandler.handleKeyDown);
+    getPageFromUrl(): string {
+        const path = window.location.pathname;
+        if (path === "/camera-controls") return "camera-controls";
+        return "home";
+    }
 
-        this.renderer.start();
+    // Handle browser back/forward buttons
+    handlePopState = () => {
+        this.setState({
+            currentPage: this.getPageFromUrl()
+        });
+    }
+
+    // Navigate to a different page
+    navigateTo = (page: string) => {
+        // Update browser history
+        const url = page === "home" ? "/" : `/${page}`;
+        window.history.pushState(null, '', url);
+
+        // Update component state
+        this.setState({ currentPage: page });
     }
 
     render() {
+        // Render different content based on the current page
+        if (this.state.currentPage === "camera-controls") {
+            return <CameraControls />;
+        }
+
+        // Home page with links to examples
         return (
-            <div>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100vh',
+                padding: '20px',
+                backgroundColor: '#1e1e1e',
+                color: 'white'
+            }}>
+                <h1 style={{ fontSize: '2.5rem', marginBottom: '40px' }}>WebGL Examples</h1>
+
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '15px',
+                    width: '300px'
+                }}>
+                    <ExampleCard
+                        title="Camera Controls"
+                        description="Example demonstrating WASD camera controls with a simple white box."
+                        onClick={() => this.navigateTo("camera-controls")}
+                    />
+
+                    {/* Add more example cards here as you create them */}
+                </div>
             </div>
         );
     }
 
     componentWillUnmount() {
-        // Clean up event listener when component unmounts
-        document.removeEventListener('keydown', this.keyboardHandler.handleKeyDown);
+        // Remove popstate event listener
+        window.removeEventListener('popstate', this.handlePopState);
     }
+}
+
+// A simple card component for example links
+interface ExampleCardProps {
+    title: string;
+    description: string;
+    onClick: () => void;
+}
+
+function ExampleCard(props: ExampleCardProps) {
+    const { title, description, onClick } = props;
+
+    return (
+        <div
+            onClick={onClick}
+            className="example-card"
+            style={{
+                backgroundColor: '#333',
+                borderRadius: '8px',
+                padding: '20px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                border: '1px solid #444'
+            }}
+        >
+            <h2 style={{ margin: '0 0 10px 0', color: '#4CAF50' }}>{title}</h2>
+            <p style={{ margin: 0, color: '#ccc' }}>{description}</p>
+        </div>
+    );
 }
 
 document.addEventListener("DOMContentLoaded", () => {

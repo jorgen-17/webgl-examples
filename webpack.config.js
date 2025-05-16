@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     entry: "./src/main.tsx",
     output: {
@@ -19,6 +21,13 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: "ts-loader",
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' }
+                ]
             }
         ]
     },
