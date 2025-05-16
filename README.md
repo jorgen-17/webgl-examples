@@ -1,4 +1,4 @@
-# webglPaint
+# webgl-examples
 getting up and running:
 >$npm i
 >
