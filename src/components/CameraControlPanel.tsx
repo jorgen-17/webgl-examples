@@ -1,7 +1,5 @@
 import * as React from "react";
 import { WebGLRenderer3d } from "webgl-renderer";
-import { KeyboardHandler } from "../input/keyboard-handler";
-import { MouseHandler } from "../input/mouse-handler";
 
 interface ControlPanelProps {
     // Add any props if needed in the future
@@ -11,9 +9,8 @@ interface ControlPanelProps {
 class CameraControlPanel extends React.Component<ControlPanelProps, {}>
 {
     private renderer: WebGLRenderer3d;
-    private keyboardHandler: KeyboardHandler;
-    private mouseHandler: MouseHandler;
     private showControls: boolean = true;
+    private mouseIsLocked: boolean = false;
 
     constructor(props: ControlPanelProps) {
         super(props);
@@ -22,24 +19,16 @@ class CameraControlPanel extends React.Component<ControlPanelProps, {}>
 
     componentDidMount() {
         // Add keydown event listener
-        this.keyboardHandler = new KeyboardHandler(this.renderer);
-        document.addEventListener('keydown', this.keyboardHandler.handleKeyDown);
-
-        this.mouseHandler = new MouseHandler(this.renderer);
-        document.addEventListener('mousedown', this.mouseHandler.handleMouseDown);
-        document.addEventListener('keydown', this.mouseHandler.handleEscapeKey);
-        document.addEventListener('mousemove', this.mouseHandler.handleMouseMove);
+        document.addEventListener('keydown', this.handleKeyDown);
+        document.addEventListener('mousedown', this.handleMouseDown);
+        document.addEventListener('mousemove', this.handleMouseMove);
     }
 
     componentWillUnmount() {
         // Clean up event listener when component unmounts
-        if (this.keyboardHandler) {
-            document.removeEventListener('keydown', this.keyboardHandler.handleKeyDown);
-        }
-        if (this.mouseHandler) {
-            document.removeEventListener('mousedown', this.mouseHandler.handleMouseDown);
-            document.removeEventListener('keydown', this.mouseHandler.handleEscapeKey);
-        }
+        document.removeEventListener('keydown', this.handleKeyDown);
+        document.removeEventListener('mousedown', this.handleMouseDown);
+        document.removeEventListener('mousemove', this.handleMouseMove);
     }
 
     render() {
@@ -67,6 +56,58 @@ class CameraControlPanel extends React.Component<ControlPanelProps, {}>
             </div>
         );
     }
+
+    handleKeyDown = (event: KeyboardEvent): void => {
+        switch(event.key.toLowerCase()) {
+            case 'w':
+                console.log("w");
+                this.renderer.camera.zoomIn(0.1);
+                break;
+            case 'a':
+                console.log("a");
+                this.renderer.camera.panX(-0.1);
+                break;
+            case 's':
+                console.log("s");
+                this.renderer.camera.zoomOut(0.1);
+                break;
+            case 'd':
+                console.log("d");
+                this.renderer.camera.panX(0.1);
+                break;
+            case ' ':
+                console.log("space");
+                this.renderer.camera.panY(0.1);
+                break;
+            case 'control':
+                console.log("control");
+                this.renderer.camera.panY(-0.1);
+                break;
+            case 'escape':
+                console.log("Escape");
+                document.exitPointerLock();
+                this.mouseIsLocked = false;
+                break;
+            case 'c':
+                console.log("c");
+                this.showControls = !this.showControls;
+                this.setState({ showControls: this.showControls });
+                break;
+        }
+    }
+
+    handleMouseDown = (event: MouseEvent): void => {
+        console.log("Left Click");
+        document.body.requestPointerLock();
+        this.mouseIsLocked = true;
+    }
+
+    handleMouseMove(event: MouseEvent) {
+        if (this.mouseIsLocked) {
+            console.log("mouse moved:", event.movementX, event.movementY);
+        }
+    }
+
 }
 
 export default CameraControlPanel;

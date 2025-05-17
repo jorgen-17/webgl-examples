@@ -13,7 +13,6 @@
         "@types/react-dom": "^19.1.5",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
-        "simple-dux": "^1.1.0",
         "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#threeLeDee"
     },
     "devDependencies": {
