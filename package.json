@@ -8,10 +8,11 @@
         "build": "tsc"
     },
     "dependencies": {
-        "@types/react": "^15.0.12",
-        "@types/react-dom": "^0.14.23",
-        "react": "^15.4.2",
-        "react-dom": "^15.4.2",
+        "@types/node": "^22.15.18",
+        "@types/react": "^19.1.4",
+        "@types/react-dom": "^19.1.5",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
         "simple-dux": "^1.1.0",
         "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#threeLeDee"
     },
@@ -21,7 +22,7 @@
         "style-loader": "^0.21.0",
         "ts-loader": "^2.3.0",
         "tslint": "^5.5.0",
-        "typescript": "^2.4.1",
+        "typescript": "^5.8.3",
         "webpack": "^3.3.0",
         "webpack-dev-server": "^2.5.1"
     },

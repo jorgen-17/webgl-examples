@@ -1,7 +1,6 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from 'react-dom/client';
 import CameraControlsPage from "./pages/CameraControlsPage";
-
 // Simple router state
 interface AppState {
     currentPage: string;
@@ -119,5 +118,9 @@ function ExampleCard(props: ExampleCardProps) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    ReactDOM.render(<App/>, document.getElementById("main"));
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App />);
+    }
 }, false);
