@@ -1,13 +1,11 @@
 import * as React from "react";
 import { WebGLRenderer3d, RenderingOptions, RGBColor, Box, Vec3 } from "webgl-renderer";
-import KeyboardHandler from "../input/keyboard-handler";
+import CameraControlPanel from "../components/CameraControlPanel";
 
-class CameraControls extends React.Component<{}, {}>
+class CameraControlsPage extends React.Component<{}, {}>
 {
     private canvas: HTMLCanvasElement;
     private renderer: WebGLRenderer3d;
-    private keyboardHandler: KeyboardHandler;
-
     constructor(props: {})
     {
         super(props);
@@ -33,11 +31,9 @@ class CameraControls extends React.Component<{}, {}>
         const box = new Box(startPosition, endPosition, this.renderer.gl, color);
         this.renderer.addShapeToScene(box);
 
-        // Add keydown event listener
-        this.keyboardHandler = new KeyboardHandler(this.renderer);
-        document.addEventListener('keydown', this.keyboardHandler.handleKeyDown);
-
         this.renderer.start();
+
+        this.setState({ renderer: this.renderer });
     }
 
     render() {
@@ -51,28 +47,12 @@ class CameraControls extends React.Component<{}, {}>
                         Back to Home
                     </button>
                 </div>
-                <div className="control-panel">
-                    <h3>Controls:</h3>
-                    <ul>
-                        <li>W - Zoom In</li>
-                        <li>S - Zoom Out</li>
-                        <li>A - Pan Left</li>
-                        <li>D - Pan Right</li>
-                        <li>Space - Pan Up</li>
-                        <li>Ctrl - Pan Down</li>
-                    </ul>
-                </div>
+                {this.renderer && <CameraControlPanel renderer={this.renderer} />}
                 <canvas id="cameraControlsCanvas" width="800" height="500"></canvas>
             </div>
         );
     }
 
-    componentWillUnmount() {
-        // Clean up event listener when component unmounts
-        if (this.keyboardHandler) {
-            document.removeEventListener('keydown', this.keyboardHandler.handleKeyDown);
-        }
-    }
 }
 
-export default CameraControls;
+export default CameraControlsPage;

@@ -1,6 +1,6 @@
 import { WebGLRenderer3d } from "webgl-renderer";
 
-class KeyboardHandler {
+export class KeyboardHandler {
     private renderer: WebGLRenderer3d;
     constructor(renderer: WebGLRenderer3d) {
         this.renderer = renderer;

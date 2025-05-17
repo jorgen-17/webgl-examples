@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import CameraControls from "./pages/CameraControls";
+import CameraControlsPage from "./pages/CameraControlsPage";
 
 // Simple router state
 interface AppState {
@@ -48,7 +48,7 @@ class App extends React.Component<{}, AppState>
     render() {
         // Render different content based on the current page
         if (this.state.currentPage === "camera-controls") {
-            return <CameraControls />;
+            return <CameraControlsPage />;
         }
 
         // Home page with links to examples
