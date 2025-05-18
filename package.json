@@ -4,26 +4,21 @@
     "description": "webGl examples",
     "main": "index.html",
     "scripts": {
-        "start": "npx webpack-dev-server",
-        "build": "tsc"
+        "start": "vite",
+        "build": "vue-tsc --noEmit && vite build",
+        "preview": "vite preview"
     },
     "dependencies": {
-        "@types/node": "^22.15.18",
-        "@types/react": "^19.1.4",
-        "@types/react-dom": "^19.1.5",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0",
+        "vue": "^3.3.11",
+        "vue-router": "^4.2.5",
         "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#threeLeDee"
     },
     "devDependencies": {
-        "css-loader": "^0.28.11",
-        "source-map-loader": "^0.1.6",
-        "style-loader": "^0.21.0",
-        "ts-loader": "^2.3.0",
-        "tslint": "^5.5.0",
-        "typescript": "^5.8.3",
-        "webpack": "^3.3.0",
-        "webpack-dev-server": "^2.5.1"
+        "@vitejs/plugin-vue": "^4.5.2",
+        "@vue/compiler-sfc": "^3.3.11",
+        "typescript": "^5.3.3",
+        "vite": "^5.0.10",
+        "vue-tsc": "^1.8.25"
     },
     "repository": {
         "type": "git",
