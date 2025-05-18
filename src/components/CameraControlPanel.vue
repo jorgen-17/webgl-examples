@@ -11,7 +11,6 @@
         <li>Space - Pan Up</li>
         <li>Ctrl - Pan Down</li>
         <li>Left Click - Lock Mouse</li>
-        <li>Escape - Unlock Mouse</li>
       </template>
       <template v-else>
         <li>C - Show Controls</li>
@@ -30,11 +29,14 @@ export default defineComponent({
     renderer: {
       type: Object as () => WebGLRenderer3d,
       required: true
+    },
+    canvas: {
+      type: HTMLCanvasElement,
+      required: true
     }
   },
   setup(props) {
     const showControls = ref(true)
-    const mouseIsLocked = ref(false)
 
     const handleKeyDown = (event: KeyboardEvent) => {
       switch(event.key.toLowerCase()) {
@@ -62,11 +64,6 @@ export default defineComponent({
           console.log("control")
           props.renderer.camera.panY(-0.1)
           break
-        case 'escape':
-          console.log("Escape")
-          document.exitPointerLock()
-          mouseIsLocked.value = false
-          break
         case 'c':
           console.log("c")
           showControls.value = !showControls.value
@@ -74,28 +71,37 @@ export default defineComponent({
       }
     }
 
-    const handleMouseDown = (event: MouseEvent) => {
-      console.log("Left Click")
-      document.body.requestPointerLock()
-      mouseIsLocked.value = true
+    const handleCanvasMouseDown = (event: MouseEvent) => {
+      if (event.button === 0) {
+        console.log("Canvas Left Click")
+        document.body.requestPointerLock()
+      }
     }
 
     const handleMouseMove = (event: MouseEvent) => {
-      if (mouseIsLocked.value) {
+      if (document.pointerLockElement) {
         console.log("mouse moved:", event.movementX, event.movementY)
       }
     }
 
     onMounted(() => {
       document.addEventListener('keydown', handleKeyDown)
-      document.addEventListener('mousedown', handleMouseDown)
       document.addEventListener('mousemove', handleMouseMove)
+
+      // Add the mousedown listener to the canvas that was passed as a prop
+      if (props.canvas) {
+        props.canvas.addEventListener('mousedown', handleCanvasMouseDown)
+      }
     })
 
     onUnmounted(() => {
       document.removeEventListener('keydown', handleKeyDown)
-      document.removeEventListener('mousedown', handleMouseDown)
       document.removeEventListener('mousemove', handleMouseMove)
+
+      // Clean up the canvas-specific event listener
+      if (props.canvas) {
+        props.canvas.removeEventListener('mousedown', handleCanvasMouseDown)
+      }
     })
 
     return {

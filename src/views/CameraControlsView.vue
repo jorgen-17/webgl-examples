@@ -4,8 +4,8 @@
     <div class="back-button">
       <button @click="navigateToHome">Back to Home</button>
     </div>
-    <camera-control-panel v-if="renderer" :renderer="renderer" />
-    <canvas id="cameraControlsCanvas" width="800" height="500"></canvas>
+    <camera-control-panel v-if="renderer && canvasRef" :renderer="renderer" :canvas="canvasRef" />
+    <canvas ref="canvasRef" id="cameraControlsCanvas" width="800" height="500"></canvas>
   </div>
 </template>
 
@@ -23,14 +23,14 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const renderer = ref<WebGLRenderer3d | null>(null)
+    const canvasRef = ref<HTMLCanvasElement | null>(null)
 
     const navigateToHome = () => {
       router.push('/')
     }
 
     onMounted(() => {
-      const canvas = document.getElementById("cameraControlsCanvas") as HTMLCanvasElement
-      if (!canvas) return
+      if (!canvasRef.value) return
 
       const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1)
       const renderingOptions: RenderingOptions = {
@@ -38,7 +38,7 @@ export default defineComponent({
         fullscreen: true
       }
 
-      renderer.value = new WebGLRenderer3d(canvas, renderingOptions)
+      renderer.value = new WebGLRenderer3d(canvasRef.value, renderingOptions)
 
       // Create a simple white box
       const startPosition = new Vec3(-0.05, -0.05, 0)
@@ -52,6 +52,7 @@ export default defineComponent({
 
     return {
       renderer,
+      canvasRef,
       navigateToHome
     }
   }
