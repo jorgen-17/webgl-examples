@@ -11,6 +11,7 @@
         <li>Space - Pan Up</li>
         <li>Ctrl - Pan Down</li>
         <li>Left Click - Lock Mouse</li>
+        <li>R - Reset Camera</li>
       </template>
       <template v-else>
         <li>C - Show Controls</li>
@@ -27,7 +28,7 @@ export default defineComponent({
   name: 'CameraControlPanel',
   props: {
     renderer: {
-      type: Object as () => WebGLRenderer3d,
+      type: WebGLRenderer3d,
       required: true
     },
     canvas: {
@@ -67,6 +68,10 @@ export default defineComponent({
         case 'c':
           console.log("c")
           showControls.value = !showControls.value
+          break
+        case 'r':
+          console.log("r")
+          props.renderer.camera.reset()
           break
       }
     }

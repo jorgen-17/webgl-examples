@@ -7,11 +7,14 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
     }
   },
+  optimizeDeps: {
+    include: ['webgl-renderer']
+  },
   server: {
-    port: 8080,
+    port: 8081,
     open: true
   }
 })
