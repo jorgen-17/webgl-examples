@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
-import { WebGLRenderer3d } from 'webgl-renderer'
+import { WebGLRenderer3d, Vec3 } from 'webgl-renderer'
 
 export default defineComponent({
   name: 'CameraControlPanel',
@@ -43,27 +43,27 @@ export default defineComponent({
       switch(event.key.toLowerCase()) {
         case 'w':
           console.log("w")
-          props.renderer.camera.zoomIn(0.1)
+          props.renderer.camera.moveForward()
           break
         case 'a':
           console.log("a")
-          props.renderer.camera.panX(-0.1)
+          props.renderer.camera.moveLeft()
           break
         case 's':
           console.log("s")
-          props.renderer.camera.zoomOut(0.1)
+          props.renderer.camera.moveBackward()
           break
         case 'd':
           console.log("d")
-          props.renderer.camera.panX(0.1)
+          props.renderer.camera.moveRight()
           break
         case ' ':
           console.log("space")
-          props.renderer.camera.panY(0.1)
+          props.renderer.camera.moveUp()
           break
         case 'control':
           console.log("control")
-          props.renderer.camera.panY(-0.1)
+          props.renderer.camera.moveDown()
           break
         case 'c':
           console.log("c")
@@ -86,6 +86,10 @@ export default defineComponent({
     const handleMouseMove = (event: MouseEvent) => {
       if (document.pointerLockElement) {
         console.log("mouse moved:", event.movementX, event.movementY)
+        const lookSensitivity = 0.1;
+        const lookX = event.movementX * lookSensitivity;
+        const lookY = event.movementY * lookSensitivity;
+        props.renderer.camera.rotateView(-lookX, -lookY)
       }
     }
 

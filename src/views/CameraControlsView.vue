@@ -41,11 +41,24 @@ export default defineComponent({
       renderer.value = new WebGLRenderer3d(canvasRef.value, renderingOptions)
 
       // Create a simple white box
-      const startPosition = new Vec3(-0.05, -0.05, 0)
-      const endPosition = new Vec3(0.05, 0.05, 0)
-      const color = new RGBColor(1, 1, 1)
-      const box = new Box(startPosition, endPosition, renderer.value.gl, color)
-      renderer.value.addShapeToScene(box)
+      const startPosition = new Vec3(-0.05, 0.05, 0)
+      const endPosition = new Vec3(-0.15, 0.15, 0)
+      const box1color = new RGBColor(1, 1, 1)
+      const box1 = new Box(startPosition, endPosition, renderer.value.gl, box1color)
+      renderer.value.addShapeToScene(box1)
+
+      const startPosition2 = new Vec3(0.05, 0.05, 0)
+      const endPosition2 = new Vec3(0.15, 0.15, 0)
+      const box2color = new RGBColor(0.25, 0.75, 0.50)
+      const box2 = new Box(startPosition2, endPosition2, renderer.value.gl, box2color)
+      renderer.value.addShapeToScene(box2)
+
+      const eyePosition = new Vec3(0.25, 0.25, 0.25)
+      const upPosition = new Vec3(eyePosition.x, eyePosition.y + 1, eyePosition.z)
+      const lookAtPoint = new Vec3(0, 0, 0)
+      renderer.value.camera.eyePosition = eyePosition
+      renderer.value.camera.upPosition = upPosition
+      renderer.value.camera.lookAtPoint = lookAtPoint
 
       renderer.value.start()
     })

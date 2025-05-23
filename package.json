@@ -6,7 +6,8 @@
     "scripts": {
         "start": "vite",
         "build": "vue-tsc --noEmit && vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "rei": "rm -rf node_modules && npm install"
     },
     "dependencies": {
         "vue": "^3.3.11",
