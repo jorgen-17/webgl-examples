@@ -86,10 +86,9 @@ export default defineComponent({
     const handleMouseMove = (event: MouseEvent) => {
       if (document.pointerLockElement) {
         console.log("mouse moved:", event.movementX, event.movementY)
-        const lookSensitivity = 0.1;
-        const lookX = event.movementX * lookSensitivity;
-        const lookY = event.movementY * lookSensitivity;
-        props.renderer.camera.rotateView(-lookX, -lookY)
+
+        props.renderer.camera.rotatePitch(-event.movementY)
+        props.renderer.camera.rotateYaw(-event.movementX)
       }
     }
 
