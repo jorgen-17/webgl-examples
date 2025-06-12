@@ -12,7 +12,7 @@
     "dependencies": {
         "vue": "^3.3.11",
         "vue-router": "^4.2.5",
-        "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#threeLeDee"
+        "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#v0.8.4"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.5.2",
