@@ -1,34 +1,48 @@
 {
-    "name": "webgl-examples",
-    "version": "0.0.1",
-    "description": "webGl examples",
-    "main": "index.html",
-    "scripts": {
-        "start": "vite",
-        "build": "vue-tsc --noEmit && vite build",
-        "preview": "vite preview",
-        "rei": "rm -rf node_modules && npm install"
-    },
-    "dependencies": {
-        "vue": "^3.3.11",
-        "vue-router": "^4.2.5",
-        "webgl-renderer": "git+https://github.com/jorgen-17/webgl-renderer.git#v0.8.4"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^4.5.2",
-        "@vue/compiler-sfc": "^3.3.11",
-        "typescript": "^5.3.3",
-        "vite": "^5.0.10",
-        "vue-tsc": "^1.8.25"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jorgen-17/webglExamples.git"
-    },
-    "author": "jorgen-17",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/jorgen-17/webglExamples/issues"
-    },
-    "homepage": "https://github.com/jorgen-17/webglExamples #readme"
+  "name": "webgl-examples",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/router": "^20.3.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "webgl-renderer": "github:jorgen-17/webgl-renderer#v0.8.5"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.2",
+    "@angular/cli": "^20.3.2",
+    "@angular/compiler-cli": "^20.3.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.9.2"
+  }
 }

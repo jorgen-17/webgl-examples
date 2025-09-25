@@ -1,29 +1,36 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "strict": true,
-        "jsx": "preserve",
-        "moduleResolution": "node",
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true,
-        "useDefineForClassFields": true,
-        "sourceMap": true,
-        "baseUrl": ".",
-        "types": ["vite/client"],
-        "paths": {
-            "@/*": ["src/*"]
-        },
-        "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  "compileOnSave": false,
+  "exclude": ["node_modules", "./node_modules/*"],
+  "compilerOptions": {
+    "strict": false,
+    "noImplicitOverride": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve",
+    "strictPropertyInitialization": false
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.vue"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

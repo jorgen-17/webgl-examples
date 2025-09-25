@@ -1,31 +1,42 @@
 {
-    "version": "2.0.0",
-    "command": "${workspaceRoot}/node_modules/.bin/webpack",
-    "args": [
-    ],
-    "echoCommand": true,
-    "tasks": [
-        {
-            "label": "webpack dev",
-            "type": "shell",
-            "command": "${workspaceRoot}/node_modules/.bin/webpack",
-            "args": [
-                ""
-            ],
-            "problemMatcher": [],
-            "group": {
-                "_id": "build",
-                "isDefault": false
-            }
-        },
-        {
-            "label": "webpack dist",
-            "type": "shell",
-            "command": "${workspaceRoot}/node_modules/.bin/webpack",
-            "args": [
-                "-p --optimize-minimize"
-            ],
-            "problemMatcher": []
+  // For more information, visit: https://go.microsoft.com/fwlink/?LinkId=733558
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "start",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "bundle generation complete"
+          }
         }
-    ]
+      }
+    },
+    {
+      "type": "npm",
+      "script": "test",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "bundle generation complete"
+          }
+        }
+      }
+    }
+  ]
 }

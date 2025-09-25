@@ -1,0 +1,15 @@
+<div class="control-panel" (click)="toggleView()">
+  <h3>Camera Controls:</h3>
+  <ul>
+    <ng-container *ngIf="showControls">
+      <li>W - Zoom In</li>
+      <li>S - Zoom Out</li>
+      <li>A - Pan Left</li>
+      <li>D - Pan Right</li>
+      <li>Space - Pan Up</li>
+      <li>Ctrl - Pan Down</li>
+      <li>Left Click - Lock Mouse</li>
+      <li>R - Reset Camera</li>
+    </ng-container>
+  </ul>
+</div>

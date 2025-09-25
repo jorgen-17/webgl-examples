@@ -1,0 +1,22 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #4CAF50;
+  margin-bottom: 2rem;
+}
+
+.examples-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
