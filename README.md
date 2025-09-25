@@ -21,4 +21,4 @@ npm run build
 
 ## Examples
 
-- **Camera Controls**: Demonstrates WASD camera controls with a simple white box.
+- **Camera Controls**: WASD camera controls to move around a 3d scene.
